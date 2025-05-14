@@ -42,13 +42,15 @@ class CustomCIFAR100Dataset(Dataset):
 
 def get_cifar100_ds(config):
     dataset = load_dataset("cifar100")
-    train_dataset = CustomCIFAR100Dataset(dataset["train"])
-    val_dataset = CustomCIFAR100Dataset(dataset["test"])
+
+    train_dataset = CustomCIFAR100Dataset(dataset["train"], resize=(
+        config["ds_width"], config["ds_height"]))
+    val_dataset = CustomCIFAR100Dataset(dataset["test"], resize=(
+        config["ds_width"], config["ds_height"]))
+
     train_loader = DataLoader(
-        train_dataset, batch_size=config["batch_size"], resize=(
-            config["ds_width"], config["ds_height"]), shuffle=True
+        train_dataset, batch_size=config["batch_size"],  shuffle=True
     )
     val_loader = DataLoader(
-        val_dataset, batch_size=config["batch_size"], resize=(
-            config["ds_width"], config["ds_height"]), shuffle=False)
+        val_dataset, batch_size=config["batch_size"], shuffle=False)
     return train_loader, val_loader
