@@ -116,7 +116,7 @@ def finetuning():
         epoch_duration = epoch_end_time - epoch_start_time  # Time in seconds
 
         avg_epoch_loss = epoch_loss / len(train_data_loader)
-        log_message = f"Epoch: {epoch+1}\t; Avg Loss: {avg_epoch_loss:.4f}; Val acc\t{val_accuracy:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
+        log_message = f"Epoch: {epoch+1}; Avg Loss: {avg_epoch_loss:.4f}; Val acc: {val_accuracy:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
         log_to_file(log_file, log_message)
 
         model_filename = get_weights_file_path(config, f"{epoch:02d}")
