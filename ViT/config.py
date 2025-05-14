@@ -3,8 +3,8 @@ from pathlib import Path
 
 def get_config():
     return {
-        "batch_size": 512,
-        "num_epochs": 40,
+        "batch_size": 96,
+        "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "ViT",
         "preload": "latest",

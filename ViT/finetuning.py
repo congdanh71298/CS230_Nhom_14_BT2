@@ -28,8 +28,8 @@ def run_validation(model, validation_loader, device, print_msg=print):
             images, labels = images.to(device), labels.to(device)
 
             outputs = model(images)  # shape: (batch_size, seq_len, d_model)
-
-            preds = outputs.argmax(dim=1)
+            logits = outputs.logits
+            preds = logits.argmax(dim=1)
             correct += (preds == labels).sum().item()
             total += labels.size(0)
 
@@ -91,7 +91,9 @@ def finetuning_ViT():
 
             outputs = model(images)
 
-            loss = loss_fn(outputs, labels)
+            logits = outputs.logits
+
+            loss = loss_fn(logits, labels)
             epoch_loss += loss.item()
             batch_iterator.set_postfix({"loss": f"{loss.item():6.3f}"})
 
