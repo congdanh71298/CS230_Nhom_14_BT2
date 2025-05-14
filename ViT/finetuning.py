@@ -49,7 +49,7 @@ def finetuning_ViT():
 
     model = get_model()
     model.to(device)
-    print(f"Model total params {model.num_params}")
+    print(f"Model total params {model.num_parameters}")
 
     initial_epoch = 0
     global_step = 0
