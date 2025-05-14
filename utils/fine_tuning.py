@@ -1,21 +1,13 @@
 import os
 from pathlib import Path
 import time
-from transformers import ViTForImageClassification
-from ViT.config import get_config
 import torch
 import torch.nn as nn
 from tqdm import tqdm
+
 from dataset.cifar100 import get_cifar100_ds
 from utils import log_to_file
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
-
-
-def get_model():
-    model = ViTForImageClassification.from_pretrained(
-        "google/vit-base-patch16-224-in21k", num_labels=100)
-    return model
-
 
 def run_validation(model, validation_loader, device, print_msg=print):
     model.eval()
@@ -39,15 +31,13 @@ def run_validation(model, validation_loader, device, print_msg=print):
     return accuracy
 
 
-def finetuning_ViT():
-    config = get_config()
+def finetuning(config, model):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device {device}")
 
     Path(config["model_folder"]).mkdir(parents=True, exist_ok=True)
     (train_data_loader, val_data_loader) = get_cifar100_ds(config)
 
-    model = get_model()
     model.to(device)
 
     initial_epoch = 0
@@ -77,8 +67,7 @@ def finetuning_ViT():
     # Header for the lo
 
     for epoch in range(initial_epoch, config["num_epochs"]):
-        batch_iterator = tqdm(
-            train_data_loader, desc=f"Processing epoch {epoch:02d}")
+        batch_iterator = tqdm(train_data_loader, desc=f"Processing epoch {epoch:02d}")
         epoch_loss = 0.0
 
         epoch_start_time = time.time()
