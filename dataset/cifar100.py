@@ -35,7 +35,7 @@ class CustomCIFAR100Dataset(Dataset):
             torch.tensor(image).permute(2, 0, 1).float()
         )
 
-        label = self.dataset[idx]["label"]
+        label = self.dataset[idx]['fine_labels']
 
         return image, label
 
