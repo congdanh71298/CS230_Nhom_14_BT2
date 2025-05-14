@@ -10,4 +10,5 @@ def get_config():
         "preload": "latest",
         "ds_width": 224,
         "ds_height": 224,
+        "model_basename": "finetuning"
     }
