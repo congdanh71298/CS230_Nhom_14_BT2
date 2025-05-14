@@ -6,8 +6,9 @@ import torch.nn as nn
 from tqdm import tqdm
 
 from dataset.cifar100 import get_cifar100_ds
-from utils import log_to_file
+from utils.log_to_file import log_to_file
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
+
 
 def run_validation(model, validation_loader, device, print_msg=print):
     model.eval()
@@ -63,13 +64,13 @@ def finetuning(config, model):
 
     loss_fn = nn.CrossEntropyLoss().to(device)
 
-    log_file = os.path.join(config["model_folder"], "training_log.txt")
-    # Header for the lo
+    os.makedirs("log", exist_ok=True)
+
+    log_file = os.path.join("log", f"{config['model_folder']}.txt")
 
     for epoch in range(initial_epoch, config["num_epochs"]):
         batch_iterator = tqdm(train_data_loader, desc=f"Processing epoch {epoch:02d}")
         epoch_loss = 0.0
-
         epoch_start_time = time.time()
         for batch in batch_iterator:
             model.train()
