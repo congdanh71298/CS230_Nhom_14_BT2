@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import time
-from transformers import ViTForImageClassification, ViTConfig
+from transformers import ViTForImageClassification
 from ViT.config import get_config
 import torch
 import torch.nn as nn
