@@ -29,13 +29,16 @@ def get_ConvNext_model():
     model = ConvNextForImageClassification.from_pretrained(
         "facebook/convnext-base-224",  # or 'convnext-small', 'convnext-tiny', etc.
         num_labels=100,
+        ignore_mismatched_sizes=True,
     )
     return model
 
 
 def get_Swin_model():
     model = SwinForImageClassification.from_pretrained(
-        "microsoft/swin-base-patch4-window7-224-in22k", num_labels=100
+        "microsoft/swin-base-patch4-window7-224-in22k",
+        num_labels=100,
+        ignore_mismatched_sizes=True,
     )
     return model
 

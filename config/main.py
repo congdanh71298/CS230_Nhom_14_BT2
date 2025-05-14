@@ -1,6 +1,6 @@
 config = {
     "convnext": {
-        "batch_size": 96,
+        "batch_size": 56,
         "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "convnext",
@@ -10,7 +10,7 @@ config = {
         "model_basename": "finetuning",
     },
     "swin": {
-        "batch_size": 96,
+        "batch_size": 56,
         "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "swin",
@@ -33,7 +33,7 @@ config = {
         "batch_size": 96,
         "num_epochs": 15,
         "lr": 10**-4,
-        "model_folder": "vit",
+        "model_folder": "densenet",
         "preload": "latest",
         "ds_width": 224,
         "ds_height": 224,
@@ -43,7 +43,7 @@ config = {
         "batch_size": 96,
         "num_epochs": 15,
         "lr": 10**-4,
-        "model_folder": "vit",
+        "model_folder": "efficientnet",
         "preload": "latest",
         "ds_width": 224,
         "ds_height": 224,
