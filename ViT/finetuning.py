@@ -39,7 +39,7 @@ def run_validation(model, validation_loader, device, print_msg=print):
     return accuracy
 
 
-def finetuning():
+def finetuning_ViT():
     config = get_config()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device {device}")
@@ -129,8 +129,3 @@ def finetuning():
             },
             model_filename,
         )
-
-
-if __name__ == "__main__":
-    # warnings.filterwarnings("ignore")
-    finetuning()
