@@ -20,7 +20,7 @@ config = {
         "model_basename": "finetuning",
     },
     "vit": {
-        "batch_size": 2,
+        "batch_size": 96,
         "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "vit",
