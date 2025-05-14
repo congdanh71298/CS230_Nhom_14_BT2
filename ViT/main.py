@@ -129,3 +129,8 @@ def finetuning():
             },
             model_filename,
         )
+
+
+if __name__ == "__main__":
+    # warnings.filterwarnings("ignore")
+    finetuning()
