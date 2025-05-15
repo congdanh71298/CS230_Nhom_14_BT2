@@ -10,6 +10,17 @@ import argparse
 
 from config.main import get_config
 from utils.fine_tuning import finetuning
+from types import SimpleNamespace
+
+
+class HuggingFaceStyleWrapper(nn.Module):
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+
+    def forward(self, x):
+        logits = self.model(x)
+        return SimpleNamespace(logits=logits)  # mimic HuggingFace output
 
 
 def get_ViT_model():
@@ -22,12 +33,13 @@ def get_ViT_model():
 def get_DenseNet_model():
     model = densenet121(pretrained=True)
     model.classifier = nn.Linear(model.classifier.in_features, 100)
-    return model
+    return HuggingFaceStyleWrapper(model)
 
 
 def get_ConvNext_model():
     model = ConvNextForImageClassification.from_pretrained(
-        "facebook/convnext-base-224",  # or 'convnext-small', 'convnext-tiny', etc.
+        # or 'convnext-small', 'convnext-tiny', etc.
+        "facebook/convnext-base-224",
         num_labels=100,
         ignore_mismatched_sizes=True,
     )
@@ -46,7 +58,7 @@ def get_Swin_model():
 def get_EfficientNet_model():
     model = efficientnet_b0(pretrained=True)  # Or b1, b2, ..., b7
     model.classifier[1] = nn.Linear(model.classifier[1].in_features, 100)
-    return model
+    return HuggingFaceStyleWrapper(model)
 
 
 def get_model(model_name):
