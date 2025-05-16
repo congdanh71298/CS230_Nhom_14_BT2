@@ -1,0 +1,15 @@
+Epoch: 1; Avg Loss: 1.9204; Val acc: 0.7482; Duration: 496.75s; Device: cuda
+Epoch: 2; Avg Loss: 0.7039; Val acc: 0.7942; Duration: 495.16s; Device: cuda
+Epoch: 3; Avg Loss: 0.4063; Val acc: 0.8123; Duration: 495.12s; Device: cuda
+Epoch: 4; Avg Loss: 0.2406; Val acc: 0.8161; Duration: 495.08s; Device: cuda
+Epoch: 5; Avg Loss: 0.1473; Val acc: 0.8089; Duration: 495.14s; Device: cuda
+Epoch: 6; Avg Loss: 0.0994; Val acc: 0.8175; Duration: 495.39s; Device: cuda
+Epoch: 7; Avg Loss: 0.0757; Val acc: 0.8100; Duration: 495.23s; Device: cuda
+Epoch: 8; Avg Loss: 0.0729; Val acc: 0.8077; Duration: 495.21s; Device: cuda
+Epoch: 9; Avg Loss: 0.0695; Val acc: 0.7947; Duration: 495.57s; Device: cuda
+Epoch: 10; Avg Loss: 0.0641; Val acc: 0.8125; Duration: 495.29s; Device: cuda
+Epoch: 11; Avg Loss: 0.0453; Val acc: 0.8070; Duration: 495.34s; Device: cuda
+Epoch: 12; Avg Loss: 0.0569; Val acc: 0.8056; Duration: 495.41s; Device: cuda
+Epoch: 13; Avg Loss: 0.0389; Val acc: 0.8141; Duration: 495.24s; Device: cuda
+Epoch: 14; Avg Loss: 0.0448; Val acc: 0.8033; Duration: 495.08s; Device: cuda
+Epoch: 15; Avg Loss: 0.0424; Val acc: 0.8146; Duration: 495.12s; Device: cuda

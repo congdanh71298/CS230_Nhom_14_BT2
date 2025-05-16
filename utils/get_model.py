@@ -6,10 +6,6 @@ from transformers import (
 )
 from torchvision.models import densenet121, efficientnet_b0
 import torch.nn as nn
-import argparse
-
-from config.main import get_config
-from utils.fine_tuning import finetuning
 from types import SimpleNamespace
 
 
@@ -75,21 +71,3 @@ def get_model(model_name):
         return get_EfficientNet_model()
     else:
         raise ValueError(f"Unknown model name: {model_name}")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--model",
-        type=str,
-        required=True,
-        help="Model to load: vit, swin, convnext, densenet, efficientnet",
-    )
-    args = parser.parse_args()
-
-    model = get_model(args.model)
-    print(f"Loaded model: {args.model}")
-
-    config = get_config(args.model)
-
-    finetuning(config, model)

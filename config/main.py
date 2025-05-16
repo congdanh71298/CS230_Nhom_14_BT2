@@ -7,8 +7,7 @@ config = {
         "preload": "latest",
         "ds_width": 224,
         "ds_height": 224,
-        "model_basename": "finetuning",
-        "drive": "https://drive.google.com/file/d/1KCo-Wi99WyXQsil-bGHe2jfUURJxNv63/view?usp=sharing"
+        "model_basename": "finetuning"
     },
     "swin": {
         "batch_size": 56,
@@ -18,8 +17,7 @@ config = {
         "preload": "latest",
         "ds_width": 224,
         "ds_height": 224,
-        "model_basename": "finetuning",
-        "drive": "https://drive.google.com/file/d/1yN30YDnqJTV2vyuZlIxRR0j8c_RJEg-4/view?usp=sharing"
+        "model_basename": "finetuning"
     },
     "vit": {
         "batch_size": 96,
@@ -30,7 +28,6 @@ config = {
         "ds_width": 224,
         "ds_height": 224,
         "model_basename": "finetuning",
-        "drive": "https://drive.google.com/file/d/1G7if7HOoIoxQoXIgLh1ClsBWBGLMb1RC/view?usp=drive_link"
     },
     "densenet": {
         "batch_size": 96,
@@ -44,7 +41,7 @@ config = {
     },
     "efficientnet": {
         "batch_size": 164,
-        "num_epochs": 35,
+        "num_epochs": 30,
         "lr": 10**-4,
         "model_folder": "efficientnet",
         "preload": "latest",
@@ -52,6 +49,7 @@ config = {
         "ds_height": 224,
         "model_basename": "finetuning",
     },
+    "drive_folders": "https://drive.google.com/drive/folders/1fA0I43PSdS9dr_M99-MKBDhiryNCuaVh?usp=drive_link"
 }
 
 
