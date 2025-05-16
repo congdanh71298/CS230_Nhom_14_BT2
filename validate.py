@@ -4,7 +4,7 @@ import torch
 
 from config.main import get_config
 from dataset.cifar100 import get_cifar100_ds
-from utils import get_model
+from utils.get_model import get_model
 from utils.fine_tuning import finetuning, run_validation
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
 

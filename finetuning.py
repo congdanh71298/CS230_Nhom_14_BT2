@@ -1,7 +1,7 @@
 import argparse
 
 from config.main import get_config
-from utils import get_model
+from utils.get_model import get_model
 from utils.fine_tuning import finetuning
 
 if __name__ == "__main__":
