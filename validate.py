@@ -1,5 +1,4 @@
 import argparse
-import gdown
 import torch
 
 from config.main import get_config
@@ -11,10 +10,6 @@ from utils.weight_retrieve import get_weights_file_path, latest_weights_file_pat
 if __name__ == "__main__":
     models = ['convnext', 'vit', 'swin', 'efficientnet', 'densenet']
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    folder_url = "https://drive.google.com/drive/folders/1fA0I43PSdS9dr_M99-MKBDhiryNCuaVh?usp=drive_link"
-
-    gdown.download_folder(url=folder_url, quiet=False, use_cookies=False)
 
     for model_name in models:
         config = get_config(model_name)
