@@ -37,5 +37,7 @@ if __name__ == "__main__":
             lambda msg: print(msg),
         )
 
+        print("-"*50)
         print(
             f'Pretrain Model: {model_name}; validation accuracy on cifar100: {val_accuracy}')
+        print("-"*50)
