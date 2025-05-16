@@ -1,0 +1,5 @@
+Epoch: 1; Avg Loss: 1.1906; Val acc: 0.8648; Duration: 1739.31s; Device: cuda
+Epoch: 2; Avg Loss: 0.2594; Val acc: 0.8788; Duration: 1752.26s; Device: cuda
+Epoch: 3; Avg Loss: 0.1204; Val acc: 0.8823; Duration: 1757.82s; Device: cuda
+Epoch: 4; Avg Loss: 0.0686; Val acc: 0.8858; Duration: 1756.51s; Device: cuda
+Epoch: 5; Avg Loss: 0.0473; Val acc: 0.8832; Duration: 1756.12s; Device: cuda

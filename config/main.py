@@ -34,7 +34,7 @@ config = {
     },
     "densenet": {
         "batch_size": 96,
-        "num_epochs": 5,
+        "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "densenet",
         "preload": "latest",
@@ -44,7 +44,7 @@ config = {
     },
     "efficientnet": {
         "batch_size": 96,
-        "num_epochs": 5,
+        "num_epochs": 15,
         "lr": 10**-4,
         "model_folder": "efficientnet",
         "preload": "latest",
