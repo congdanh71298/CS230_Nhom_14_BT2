@@ -27,6 +27,8 @@ if __name__ == "__main__":
         (train_data_loader, val_data_loader) = get_cifar100_ds(config)
 
         model = get_model(model_name)
+
+        model.to(device)
         if model_filename:
             state = torch.load(model_filename)
             model.load_state_dict(state["model_state_dict"])
