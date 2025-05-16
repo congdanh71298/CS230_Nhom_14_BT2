@@ -49,7 +49,6 @@ config = {
         "ds_height": 224,
         "model_basename": "finetuning",
     },
-    "drive_folders": "https://drive.google.com/drive/folders/1fA0I43PSdS9dr_M99-MKBDhiryNCuaVh?usp=drive_link"
 }
 
 
