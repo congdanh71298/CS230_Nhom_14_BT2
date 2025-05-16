@@ -16,8 +16,8 @@ if __name__ == "__main__":
 
     gdown.download_folder(url=folder_url, quiet=False, use_cookies=False)
 
-    for model in models:
-        config = get_config(model)
+    for model_name in models:
+        config = get_config(model_name)
         preload = config["preload"]
         model_filename = (
             latest_weights_file_path(config)
@@ -26,6 +26,7 @@ if __name__ == "__main__":
         )
         (train_data_loader, val_data_loader) = get_cifar100_ds(config)
 
+        model = get_model(model_name)
         if model_filename:
             state = torch.load(model_filename)
             model.load_state_dict(state["model_state_dict"])
@@ -40,4 +41,4 @@ if __name__ == "__main__":
         )
 
         print(
-            f'Pretrain Model: {model}; validation accuracy on cifar100: {val_accuracy}')
+            f'Pretrain Model: {model_name}; validation accuracy on cifar100: {val_accuracy}')
