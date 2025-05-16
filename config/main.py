@@ -43,8 +43,8 @@ config = {
         "model_basename": "finetuning",
     },
     "efficientnet": {
-        "batch_size": 96,
-        "num_epochs": 15,
+        "batch_size": 164,
+        "num_epochs": 35,
         "lr": 10**-4,
         "model_folder": "efficientnet",
         "preload": "latest",
