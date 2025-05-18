@@ -8,28 +8,43 @@ from tqdm import tqdm
 from dataset.cifar100 import get_cifar100_ds
 from utils.log_to_file import log_to_file
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
+from sklearn.metrics import precision_score, recall_score, f1_score
 
 
-def run_validation(model, validation_loader, device, print_msg=print):
+def cal_test_metrics(model, test_loader, device, print_msg=print):
     model.eval()
     correct = 0
     total = 0
 
+    all_preds = []
+    all_labels = []
+
     with torch.no_grad():
-        for batch in validation_loader:
+        for batch in test_loader:
             images, labels = batch
             images, labels = images.to(device), labels.to(device)
 
             outputs = model(images)  # shape: (batch_size, seq_len, d_model)
             logits = outputs.logits
             preds = logits.argmax(dim=1)
+
+            all_preds.extend(preds.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+
             correct += (preds == labels).sum().item()
             total += labels.size(0)
 
     accuracy = correct / total
+    precision = precision_score(all_labels, all_preds, average="macro", zero_division=0)
+    recall = recall_score(all_labels, all_preds, average="macro", zero_division=0)
+    f1 = f1_score(all_labels, all_preds, average="macro", zero_division=0)
 
-    print_msg(f"Accuracy: {accuracy:.2%}")
-    return accuracy
+    print_msg(f"Accuracy:  {accuracy:.2%}")
+    print_msg(f"Precision: {precision:.2%}")
+    print_msg(f"Recall:    {recall:.2%}")
+    print_msg(f"F1-Score:  {f1:.2%}")
+
+    return accuracy, precision, recall, f1
 
 
 def finetuning(config, model):
@@ -98,7 +113,7 @@ def finetuning(config, model):
 
         epoch_end_time = time.time()
 
-        val_accuracy = run_validation(
+        val_accuracy = cal_test_metrics(
             model,
             val_data_loader,
             device,
@@ -107,7 +122,7 @@ def finetuning(config, model):
         epoch_duration = epoch_end_time - epoch_start_time  # Time in seconds
 
         avg_epoch_loss = epoch_loss / len(train_data_loader)
-        log_message = f"Epoch: {epoch+1}; Avg Loss: {avg_epoch_loss:.4f}; Val acc: {val_accuracy:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
+        log_message = f"Epoch: {epoch+1}; Avg Loss: {avg_epoch_loss:.4f}; Test acc: {val_accuracy:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
         log_to_file(log_file, log_message)
 
         model_filename = get_weights_file_path(config, f"{epoch:02d}")

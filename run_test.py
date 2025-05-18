@@ -4,7 +4,7 @@ import torch
 from config.main import get_config
 from dataset.cifar100 import get_cifar100_ds
 from utils.get_model import get_model
-from utils.fine_tuning import finetuning, run_validation
+from utils.fine_tuning import finetuning, cal_test_metrics
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
 
 if __name__ == "__main__":
@@ -29,15 +29,13 @@ if __name__ == "__main__":
             model.load_state_dict(state["model_state_dict"])
         else:
             raise Exception('No model to validate')
-
-        val_accuracy = run_validation(
+        print("-"*50)
+        print(
+            f'Pretrain Model: {model_name};')
+        test_accuracy = cal_test_metrics(
             model,
             val_data_loader,
             device,
             lambda msg: print(msg),
         )
-
-        print("-"*50)
-        print(
-            f'Pretrain Model: {model_name}; validation accuracy on cifar100: {val_accuracy}')
         print("-"*50)

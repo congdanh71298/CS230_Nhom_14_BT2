@@ -1,5 +1,5 @@
-Epoch: 1; Avg Loss: 1.7630; Val acc: 0.8826; Duration: 1606.07s; Device: cuda
-Epoch: 2; Avg Loss: 0.3126; Val acc: 0.8935; Duration: 1607.40s; Device: cuda
-Epoch: 3; Avg Loss: 0.1554; Val acc: 0.8958; Duration: 1609.13s; Device: cuda
-Epoch: 4; Avg Loss: 0.0998; Val acc: 0.8943; Duration: 1608.90s; Device: cuda
-Epoch: 5; Avg Loss: 0.0756; Val acc: 0.8986; Duration: 1609.29s; Device: cuda
+Epoch: 1; Avg Loss: 1.7630; Test acc: 0.8826; Duration: 1606.07s; Device: cuda
+Epoch: 2; Avg Loss: 0.3126; Test acc: 0.8935; Duration: 1607.40s; Device: cuda
+Epoch: 3; Avg Loss: 0.1554; Test acc: 0.8958; Duration: 1609.13s; Device: cuda
+Epoch: 4; Avg Loss: 0.0998; Test acc: 0.8943; Duration: 1608.90s; Device: cuda
+Epoch: 5; Avg Loss: 0.0756; Test acc: 0.8986; Duration: 1609.29s; Device: cuda
