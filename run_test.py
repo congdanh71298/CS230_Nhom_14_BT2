@@ -40,7 +40,6 @@ if __name__ == "__main__":
             val_data_loader,
             device,
             lambda msg: print(msg),
-            return_preds=True,  # Updated function to return preds and labels
         )
 
         # Compute and save confusion matrix
