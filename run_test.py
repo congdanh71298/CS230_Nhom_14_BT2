@@ -43,9 +43,9 @@ if __name__ == "__main__":
         )
 
         # Compute and save confusion matrix
-        cm = confusion_matrix(all_labels, all_preds)
+        cm = confusion_matrix(all_labels, all_preds, normalize="true")
         disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-        fig, ax = plt.subplots(figsize=(6, 6))
+        fig, ax = plt.subplots(figsize=(20, 20))
         disp.plot(cmap="Blues", ax=ax)
         plt.title(f"Confusion Matrix - {model_name}")
         plt.grid(False)
