@@ -1,0 +1,4 @@
+Epoch: 1; Avg Loss: 1.8874; Test acc: 0.6468; Precision: 0.6934; Recall: 0.6468; F1: 0.6405; Duration: 715.50s; Device: cuda
+Epoch: 2; Avg Loss: 0.9435; Test acc: 0.7130; Precision: 0.7413; Recall: 0.7130; F1: 0.7130; Duration: 713.42s; Device: cuda
+Epoch: 3; Avg Loss: 0.5698; Test acc: 0.7094; Precision: 0.7395; Recall: 0.7094; F1: 0.7116; Duration: 713.62s; Device: cuda
+Epoch: 4; Avg Loss: 0.3450; Test acc: 0.7210; Precision: 0.7393; Recall: 0.7210; F1: 0.7203; Duration: 711.19s; Device: cuda
