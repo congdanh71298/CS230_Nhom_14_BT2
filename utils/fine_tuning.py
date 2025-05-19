@@ -44,7 +44,7 @@ def cal_test_metrics(model, test_loader, device, print_msg=print):
     print_msg(f"Recall:    {recall:.2%}")
     print_msg(f"F1-Score:  {f1:.2%}")
 
-    return accuracy, precision, recall, f1
+    return accuracy, precision, recall, f1, all_preds, all_labels
 
 
 def finetuning(config, model):

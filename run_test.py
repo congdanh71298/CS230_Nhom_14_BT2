@@ -1,6 +1,7 @@
 import argparse
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 import torch
-
+import matplotlib.pyplot as plt
 from config.main import get_config
 from dataset.cifar100 import get_cifar100_ds
 from utils.get_model import get_model
@@ -32,10 +33,15 @@ if __name__ == "__main__":
         print("-"*50)
         print(
             f'Pretrain Model: {model_name};')
-        test_accuracy = cal_test_metrics(
+        _, _, _, _, all_preds, all_labels = cal_test_metrics(
             model,
             val_data_loader,
             device,
             lambda msg: print(msg),
         )
+        cm = confusion_matrix(all_labels, all_preds)
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+        disp.plot(cmap='Blues')
+        plt.title("Confusion Matrix")
+        plt.show()
         print("-"*50)
