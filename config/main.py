@@ -49,6 +49,36 @@ config = {
         "ds_height": 224,
         "model_basename": "finetuning",
     },
+    "customcnn": {
+        "batch_size": 128,
+        "num_epochs": 30,
+        "lr": 10**-3,
+        "model_folder": "customcnn",
+        "preload": "latest",
+        "ds_width": 224,
+        "ds_height": 224,
+        "model_basename": "finetuning",
+    },
+    "resnet18": {
+        "batch_size": 128,
+        "num_epochs": 20,
+        "lr": 10**-4,
+        "model_folder": "resnet18",
+        "preload": "latest",
+        "ds_width": 224,
+        "ds_height": 224,
+        "model_basename": "finetuning",
+    },
+    "vgg16": {
+        "batch_size": 64,  # Smaller batch size due to larger model
+        "num_epochs": 20,
+        "lr": 10**-4,
+        "model_folder": "vgg16",
+        "preload": "latest",
+        "ds_width": 224,
+        "ds_height": 224,
+        "model_basename": "finetuning",
+    },
 }
 
 

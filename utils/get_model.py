@@ -4,7 +4,7 @@ from transformers import (
     SwinForImageClassification,
     ConvNextForImageClassification,
 )
-from torchvision.models import densenet121, efficientnet_b0
+from torchvision.models import densenet121, efficientnet_b0, resnet18, vgg16
 import torch.nn as nn
 from types import SimpleNamespace
 
@@ -57,6 +57,82 @@ def get_EfficientNet_model():
     return HuggingFaceStyleWrapper(model)
 
 
+class CustomCNN(nn.Module):
+    def __init__(self, num_classes=100):
+        super(CustomCNN, self).__init__()
+        
+        # First convolutional block
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(3, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        
+        # Second convolutional block
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(128, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        
+        # Third convolutional block
+        self.conv3 = nn.Sequential(
+            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.BatchNorm2d(256),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            nn.BatchNorm2d(256),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        
+        # Fully connected layers
+        self.fc = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(256 * 28 * 28, 1024),  # For 224x224 input
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.5),
+            nn.Linear(1024, 512),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.5),
+            nn.Linear(512, num_classes)
+        )
+        
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = self.conv3(x)
+        x = self.fc(x)
+        return x
+
+
+def get_CustomCNN_model():
+    model = CustomCNN(num_classes=100)
+    return HuggingFaceStyleWrapper(model)
+
+
+def get_ResNet18_model():
+    model = resnet18(pretrained=True)
+    # Adjust the final fully connected layer for CIFAR-100 (100 classes)
+    model.fc = nn.Linear(model.fc.in_features, 100)
+    return HuggingFaceStyleWrapper(model)
+
+
+def get_VGG16_model():
+    model = vgg16(pretrained=True)
+    # Adjust the classifier for CIFAR-100 (100 classes)
+    model.classifier[6] = nn.Linear(model.classifier[6].in_features, 100)
+    return HuggingFaceStyleWrapper(model)
+
+
 def get_model(model_name):
     model_name = model_name.lower()
     if model_name == "vit":
@@ -69,5 +145,11 @@ def get_model(model_name):
         return get_DenseNet_model()
     elif model_name == "efficientnet":
         return get_EfficientNet_model()
+    elif model_name == "customcnn":
+        return get_CustomCNN_model()
+    elif model_name == "resnet18":
+        return get_ResNet18_model()
+    elif model_name == "vgg16":
+        return get_VGG16_model()
     else:
         raise ValueError(f"Unknown model name: {model_name}")

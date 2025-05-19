@@ -10,7 +10,7 @@ if __name__ == "__main__":
         "--model",
         type=str,
         required=True,
-        help="Model to load: vit, swin, convnext, densenet, efficientnet",
+        help="Model to load: vit, swin, convnext, densenet, efficientnet, customcnn, resnet18, vgg16",
     )
     args = parser.parse_args()
 

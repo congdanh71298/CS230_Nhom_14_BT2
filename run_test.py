@@ -10,7 +10,7 @@ from utils.weight_retrieve import get_weights_file_path, latest_weights_file_pat
 import pandas as pd
 
 if __name__ == "__main__":
-    models = ["convnext", "vit", "swin", "efficientnet", "densenet"]
+    models = ["convnext", "vit", "swin", "efficientnet", "densenet", "customcnn", "resnet18", "vgg16"]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     for model_name in models:
