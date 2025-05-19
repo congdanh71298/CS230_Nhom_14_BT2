@@ -63,7 +63,7 @@ class CustomCNN(nn.Module):
         
         # First convolutional block
         self.conv1 = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, padding=1), # Increased filters
+            nn.Conv2d(3, 32, kernel_size=3, padding=1),  # Increased filters from 16 to 32
             nn.BatchNorm2d(32),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2)  # 224x224 -> 112x112
@@ -71,7 +71,7 @@ class CustomCNN(nn.Module):
         
         # Second convolutional block
         self.conv2 = nn.Sequential(
-            nn.Conv2d(32, 64, kernel_size=3, padding=1), # Increased filters
+            nn.Conv2d(32, 64, kernel_size=3, padding=1), # Increased filters from 32 to 64
             nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2)  # 112x112 -> 56x56
@@ -79,7 +79,7 @@ class CustomCNN(nn.Module):
         
         # Third convolutional block
         self.conv3 = nn.Sequential(
-            nn.Conv2d(64, 128, kernel_size=3, padding=1), # Increased filters
+            nn.Conv2d(64, 128, kernel_size=3, padding=1), # Increased filters from 64 to 128
             nn.BatchNorm2d(128),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2)  # 56x56 -> 28x28
@@ -87,7 +87,7 @@ class CustomCNN(nn.Module):
         
         # Fourth convolutional block
         self.conv4 = nn.Sequential(
-            nn.Conv2d(128, 256, kernel_size=3, padding=1), # Increased filters
+            nn.Conv2d(128, 256, kernel_size=3, padding=1), # Increased filters from 128 to 256
             nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2)  # 28x28 -> 14x14
@@ -95,7 +95,7 @@ class CustomCNN(nn.Module):
         
         # Fifth convolutional block
         self.conv5 = nn.Sequential(
-            nn.Conv2d(256, 512, kernel_size=3, padding=1), # Increased filters
+            nn.Conv2d(256, 512, kernel_size=3, padding=1), # Increased filters from 256 to 512
             nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2)  # 14x14 -> 7x7
@@ -106,16 +106,18 @@ class CustomCNN(nn.Module):
             nn.Conv2d(512, 512, kernel_size=3, padding=1),
             nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2)  # 7x7 -> 3x3
+            nn.MaxPool2d(kernel_size=2, stride=2)  # 7x7 -> 3x3 (assuming input 224, output becomes 3x3)
         )
         
         # Fully connected layers
+        # The input size to the linear layer depends on the output of the last pooling layer.
+        # If input is 224x224, after 6 pooling layers (224 -> 112 -> 56 -> 28 -> 14 -> 7 -> 3), it's 3x3.
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(512 * 3 * 3, 1024), # Adjusted for new conv6 output and increased dense layer
             nn.ReLU(inplace=True),
-            nn.Dropout(0.5),
-            nn.Linear(1024, num_classes) # Adjusted for new dense layer size
+            nn.Dropout(0.4), # Keeping the modified dropout
+            nn.Linear(1024, num_classes)
         )
         
     def forward(self, x):

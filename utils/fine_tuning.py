@@ -70,10 +70,18 @@ def finetuning(config, model):
     if model_filename:
         print(f"Preloading model {model_filename}")
         state = torch.load(model_filename)
-        model.load_state_dict(state["model_state_dict"])
-        initial_epoch = state["epoch"] + 1
-        optimizer.load_state_dict(state["optimizer_state_dict"])
-        global_step = state["global_step"]
+        try:
+            model.load_state_dict(state["model_state_dict"])
+            initial_epoch = state["epoch"] + 1
+            optimizer.load_state_dict(state["optimizer_state_dict"])
+            global_step = state["global_step"]
+        except RuntimeError as e:
+            print(f"Could not load state_dict from {model_filename} due to: {e}")
+            print("Starting training from scratch due to model architecture mismatch or incompatible checkpoint.")
+            initial_epoch = 0
+            global_step = 0
+            # Re-initialize optimizer if it was potentially loaded with incompatible state
+            optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"], eps=1e-9)
     else:
         print("No model to preload, starting from scratch")
 
