@@ -7,6 +7,7 @@ from dataset.cifar100 import get_cifar100_ds
 from utils.get_model import get_model
 from utils.fine_tuning import finetuning, cal_test_metrics
 from utils.weight_retrieve import get_weights_file_path, latest_weights_file_path
+import pandas as pd
 
 if __name__ == "__main__":
     models = ["convnext", "vit", "swin", "efficientnet", "densenet"]
@@ -43,15 +44,19 @@ if __name__ == "__main__":
         )
 
         # Compute and save confusion matrix
-        cm = confusion_matrix(all_labels, all_preds, normalize="true")
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-        fig, ax = plt.subplots(figsize=(20, 20))
-        disp.plot(cmap="Blues", ax=ax)
-        plt.title(f"Confusion Matrix - {model_name}")
-        plt.grid(False)
-        save_path = f"confusion_matrix_{model_name}.png"
-        plt.savefig(save_path, bbox_inches="tight")
-        plt.close(fig)
+        # cm = confusion_matrix(all_labels, all_preds, normalize="true")
+        # disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+        # fig, ax = plt.subplots(figsize=(15, 15))
+        # disp.plot(cmap="Blues", ax=ax)
+        # plt.title(f"Confusion Matrix - {model_name}")
+        # plt.grid(False)
+        # save_path = f"confusion_matrix_{model_name}.png"
+        # plt.savefig(save_path, bbox_inches="tight")
+        # plt.close(fig)
 
-        print(f"Saved confusion matrix: {save_path}")
+        # print(f"Saved confusion matrix: {save_path}")
+        csv_path = f"predictions_{model_name}.csv"
+        df = pd.DataFrame({"true_label": all_labels, "predicted_label": all_preds})
+        df.to_csv(csv_path, index=False)
+        print(f"Saved predictions to: {csv_path}")
         print("-" * 50)
