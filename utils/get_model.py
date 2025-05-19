@@ -102,7 +102,7 @@ class CustomCNN(nn.Module):
         )
         
         # Fully connected layers
-        self.fc = nn.Sequential(
+        self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(256 * 7 * 7, 512),
             nn.ReLU(inplace=True),
@@ -116,10 +116,9 @@ class CustomCNN(nn.Module):
         x = self.conv3(x)
         x = self.conv4(x)
         x = self.conv5(x)
-        x = self.fc(x)
-        return x
-
-
+        logits = self.classifier(x)
+        return logits
+        
 def get_CustomCNN_model():
     model = CustomCNN(num_classes=100)
     return HuggingFaceStyleWrapper(model)

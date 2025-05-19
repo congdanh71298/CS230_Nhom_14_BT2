@@ -50,7 +50,7 @@ config = {
         "model_basename": "finetuning",
     },
     "customcnn": {
-        "batch_size": 64,
+        "batch_size": 128,
         "num_epochs": 30,
         "lr": 10**-3,
         "model_folder": "customcnn",

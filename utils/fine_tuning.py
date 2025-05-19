@@ -113,7 +113,7 @@ def finetuning(config, model):
 
         epoch_end_time = time.time()
 
-        val_accuracy = cal_test_metrics(
+        accuracy, precision, recall, f1, _, _ = cal_test_metrics(
             model,
             val_data_loader,
             device,
@@ -122,7 +122,7 @@ def finetuning(config, model):
         epoch_duration = epoch_end_time - epoch_start_time  # Time in seconds
 
         avg_epoch_loss = epoch_loss / len(train_data_loader)
-        log_message = f"Epoch: {epoch+1}; Avg Loss: {avg_epoch_loss:.4f}; Test acc: {val_accuracy:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
+        log_message = f"Epoch: {epoch+1}; Avg Loss: {avg_epoch_loss:.4f}; Test acc: {accuracy:.4f}; Precision: {precision:.4f}; Recall: {recall:.4f}; F1: {f1:.4f}; Duration: {epoch_duration:.2f}s; Device: {device}"
         log_to_file(log_file, log_message)
 
         model_filename = get_weights_file_path(config, f"{epoch:02d}")
